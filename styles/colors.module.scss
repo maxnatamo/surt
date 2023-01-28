@@ -1,0 +1,11 @@
+$background-color: #1b1d1e;
+$container-color: #0e0e0e;
+$input-accent: #313133;
+$error-color: #da1122;
+
+:export {
+  backgroundColor: $background-color;
+  containerColor: $container-color;
+  inputAccent: $input-accent;
+  errorColor: $error-color;
+}

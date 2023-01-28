@@ -1,0 +1,18 @@
+div.inputGroup {
+    display: flex;
+    flex-direction: row;
+
+    * {
+        &:not(:first-child) {
+            margin-left: 0 !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+
+        &:not(:last-child) {
+            margin-right: 0 !important;
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  mongo:
+    image: mongo
+    container_name: surt_database
+    environment:
+      - MONGO_INITDB_DATABASE=surt
+      - MONGO_INITDB_ROOT_USERNAME=surt
+      - MONGO_INITDB_ROOT_PASSWORD=surt
+    ports:
+      - 27017:27017
+    volumes:
+      - database:/data/db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: surt_frontend
+    environment:
+      - API_ENDPOINT=http://localhost:3000
+      - MONGODB_URI=mongodb://surt:surt@database:27017/
+      - MONGODB_DB=surt
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+volumes:
+  database: {}
