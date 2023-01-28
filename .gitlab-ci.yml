@@ -19,7 +19,7 @@ before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 test:
-  state: test
+  stage: test
   image: node:19-alpine
   before_script:
     - npm install
