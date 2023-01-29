@@ -9,8 +9,10 @@ const nextConfig = {
     BASE_ADDRESS: process.env.BASE_ADDRESS ?? "http://localhost:3000",
   },
   serverRuntimeConfig: {
-    MONGODB_URI: process.env.MONGODB_URI ?? "mongodb://surt:surt@localhost:27017/",
-    MONGODB_DB: process.env.MONGODB_DB ?? "surt",
+    MONGODB_HOSTNAME: process.env.MONGODB_HOSTNAME ?? "localhost",
+    MONGODB_DATABASE: process.env.MONGODB_DATABASE ?? "surt",
+    MONGODB_USERNAME: process.env.MONGODB_USERNAME ?? "surt",
+    MONGODB_PASSWORD: process.env.MONGODB_PASSWORD ?? "surt",
   }
 };
 

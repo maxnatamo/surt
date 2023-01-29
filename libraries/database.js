@@ -3,6 +3,16 @@ import { serverConfiguration } from '@libs/env';
 
 const cached = global.mongo ?? { conn: null, promise: null };
 
+const config = () => {
+  const {
+    MONGODB_HOSTNAME,
+    MONGODB_USERNAME,
+    MONGODB_PASSWORD
+  } = serverConfiguration;
+
+  return `mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_HOSTNAME}:27017/`;
+}
+
 export const connect = async () => {
   if(cached.connection) {
     return cached.connection;
@@ -14,10 +24,12 @@ export const connect = async () => {
       useUnifiedTopology : true
     };
 
-    cached.promise = MongoClient.connect(serverConfiguration.MONGODB_URI, opts).then(client => {
+    const conf = config();
+
+    cached.promise = MongoClient.connect(conf, opts).then(client => {
       return {
         client,
-        db: client.db(serverConfiguration.MONGODB_DB),
+        db: client.db(serverConfiguration.MONGODB_DATABASE),
       };
     });
   }
