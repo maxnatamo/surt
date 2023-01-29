@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    app: surt
+    env: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: surt
+      env: database
+  template:
+    metadata:
+      labels:
+        app: surt
+        env: database
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: database-data
+      containers:
+        - name: database
+          image: mongo:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_INITDB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: mongodb_database
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: mongodb_username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: mongodb_password
+          volumeMounts:
+            - name: data
+              mountPath: /data/db
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service
+spec:
+  selector:
+    app: surt
+    env: database
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

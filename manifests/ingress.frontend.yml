@@ -1,0 +1,17 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: frontend-ingress
+  labels:
+    app: surt
+    env: frontend
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`surt.maxtrier.dk`, `www.surt.maxtrier.dk`)
+      kind: Rule
+      services:
+        - name: frontend-service
+          port: 3000

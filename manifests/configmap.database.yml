@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: database-config
+  labels:
+    app: surt
+    env: database
+data:
+  # The hostname or base address of the instance
+  hostname: https://surt.maxtrier.dk
+
+  # MongoDB hostname or address
+  mongodb_hostname: database-service
+
+  # MongoDB database to use for Surt
+  mongodb_database: surt
