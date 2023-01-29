@@ -7,7 +7,6 @@ import { verify } from '@libs/url';
 import { createHash } from '@libs/api';
 import { runtimeConfiguration  } from '@libs/env';
 
-import styles from './index.module.scss';
 import colors from '@styles/colors.module.scss';
 
 export default class Home extends React.Component {
