@@ -31,3 +31,14 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Sentry
+.sentryclirc
+# Sentry
+.sentryclirc
+
+# Sentry
+next.config.original.js
+
+# Sentry
+next.config.wizardcopy.js
