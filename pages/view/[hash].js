@@ -1,4 +1,4 @@
-import { queryInfo } from '@libs/shortener';
+import { queryInfo, viewHash } from '@libs/shortener';
 
 import colors from '@styles/colors.module.scss';
 
@@ -11,6 +11,9 @@ export default function View({ error }) {
 export async function getServerSideProps(context) {
   const hash = context.query.hash;
   const doc = await queryInfo(hash);
+
+  // Update view count
+  await viewHash(hash);
 
   if(!doc?.target) {
     return { props: { error: "Link not found" } };
