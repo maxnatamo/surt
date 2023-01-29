@@ -22,7 +22,7 @@ docker-compose up -d mongo
 docker run --rm --name mongo --network=host mongo
 ```
 
-If hosting Mongo on a remote machine or outside Docker, update `.env.local` to reflect it.
+If hosting Mongo on a remote machine or outside Docker, update `.env.development` to reflect it.
 
 Second, run the development server:
 
