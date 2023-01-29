@@ -15,7 +15,7 @@ const hashAddress = (target) => crypto.createHash('sha256').update(target).diges
  * @param hash The hash to query for
  * @returns The corresponding document, if found. Otherise, undefined.
  */
-export const find = async (hash) => {
+export const queryInfo = async (hash) => {
   const { db } = await connect();
 
   const links = await db
@@ -36,11 +36,11 @@ export const find = async (hash) => {
  * @param target The address to insert
  * @returns The hash of the new document, if the link didn't exist already. Otherwise, the existing hash.
  */
-export const create = async (target) => {
+export const createHash = async (target) => {
   const hash = hashAddress(target);
 
   /* Don't insert new documents, if one already exists */
-  if(await find(hash) != null) {
+  if(await queryInfo(hash) != null) {
     return hash;
   }
 
@@ -51,7 +51,8 @@ export const create = async (target) => {
     .collection("links")
     .insertOne({
       hash: hash,
-      target: target
+      target: target,
+      viewCount: 0
     });
 
   if(!res.acknowledged) {
@@ -67,8 +68,8 @@ export const create = async (target) => {
  * @param hash The hash to update the view count for.
  * @returns The new view count, if the document exists. Otherwise, undefined.
  */
-export const view = async (hash) => {
-  const doc = await find(hash);
+export const viewHash = async (hash) => {
+  const doc = await queryInfo(hash);
 
   /* No document found, ignore. */
   if(!doc) {
@@ -89,5 +90,5 @@ export const view = async (hash) => {
   }
 
   /* Return the new view count */
-  return (await find(hash)).viewCount;
+  return (await queryInfo(hash)).viewCount;
 }

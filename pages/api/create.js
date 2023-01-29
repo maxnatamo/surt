@@ -1,4 +1,4 @@
-import { create } from '@libs/shortener';
+import { createHash } from '@libs/shortener';
 
 export default async function handler(req, res) {
   const { target } = req.body;
@@ -14,10 +14,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const hash = await create(target);
+    const hash = await createHash(target);
     res.status(200).json({ hash: hash });
   }
   catch(e) {
     res.status(500).json({ hash: undefined });
+    
+    throw e;
   }
 }
