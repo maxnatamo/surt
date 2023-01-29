@@ -20,13 +20,13 @@ services:
       dockerfile: Dockerfile
     container_name: surt_frontend
     environment:
-      - BASE_ADDRESS=http://localhost:4000
+      - BASE_ADDRESS=http://localhost:3000
       - MONGODB_HOSTNAME=mongo
       - MONGODB_DATABASE=surt
       - MONGODB_USERNAME=surt
       - MONGODB_PASSWORD=surt
     ports:
-      - 4000:3000
+      - 3000:3000
     depends_on:
       - mongo
     restart: unless-stopped
