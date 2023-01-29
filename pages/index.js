@@ -95,4 +95,4 @@ export default class Home extends React.Component {
 }
 
 /* Force SSR */
-export const getServerSideProps = async () => { return {} };
+export const getServerSideProps = async () => { return { props: {} } };
