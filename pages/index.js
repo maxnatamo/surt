@@ -54,7 +54,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <main className={styles.main}>
+      <main>
         <Head>
           <title>Surt - a simple URL shortener</title>
         </Head>
