@@ -51,12 +51,13 @@ export default class Home extends React.Component {
     });
 
     const doc = await res.json();
-    const url = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/view/${doc.hash}`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_ADDRESS}/view/${doc.hash}`;
 
     navigator.clipboard.writeText(url);
 
     this.setState({
-      statusMessage: "The shortened link has been copied to your clipboard!"
+      statusMessage: "The shortened link has been copied to your clipboard!",
+      errorMessage: undefined
     });
   }
 
