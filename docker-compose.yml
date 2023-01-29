@@ -19,10 +19,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: surt_frontend
-    environment:
-      - API_ENDPOINT=http://localhost:3000
-      - MONGODB_URI=mongodb://surt:surt@database:27017/
-      - MONGODB_DB=surt
     ports:
       - 3000:3000
     depends_on:
