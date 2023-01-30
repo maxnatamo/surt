@@ -10,7 +10,9 @@ stages:
   - build
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
+  key:
+    files:
+      - package-lock.json
   paths:
     - node_modules/
     - .next/cache/
