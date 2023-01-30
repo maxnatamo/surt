@@ -25,6 +25,10 @@ services:
       - MONGODB_DATABASE=surt
       - MONGODB_USERNAME=surt
       - MONGODB_PASSWORD=surt
+
+      ## Fill in your own configuration, if using Sentry
+      # - SENTRY_DSN=
+      # - SENTRY_AUTH_TOKEN=
     ports:
       - 3000:3000
     depends_on:

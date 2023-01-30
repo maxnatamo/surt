@@ -17,9 +17,20 @@ const nextConfig = {
   }
 };
 
-module.exports = withSentryConfig(
-  nextConfig, {
-    silent: true
-  }, {
-    hideSourceMaps: true
-  });
+const useSentry = process.env.SENTRY_AUTH_TOKEN !== undefined;
+
+const sentryWebpackOptions = {
+  silent: true,
+};
+
+const sentryOptions = {
+  hideSourceMaps: false
+};
+
+if(useSentry) {
+  console.log("[SURT] Sentry monitoring enabled.");
+
+  module.exports = withSentryConfig(nextConfig, sentryWebpackOptions, sentryOptions);
+} else {
+  module.exports = nextConfig;
+}
