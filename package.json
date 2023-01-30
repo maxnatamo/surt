@@ -11,7 +11,7 @@
     "test:ci": "jest --testResultsProcessor=\"jest-junit\" --watchAll=false --ci --coverage"
   },
   "dependencies": {
-    "@next/font": "13.1.5",
+    "@next/font": "^13.1.5",
     "@sentry/nextjs": "^7.34.0",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.5",
