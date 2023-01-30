@@ -1,0 +1,15 @@
+commonLabels:
+  app: surt
+
+namespace: surt
+
+resources:
+  # MongoDB database
+  - configmap.database.yml
+  - secret.database.yml
+  - pvc.database.yml
+  - deployment.database.yml
+
+  # Next.js frontend
+  - deployment.frontend.yml
+  - ingress.frontend.yml
