@@ -42,4 +42,4 @@ build:
     - docker build --pull -f Dockerfile -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA" -t "$CI_REGISTRY_IMAGE:latest" .
     - docker push -a "$CI_REGISTRY_IMAGE"
   only:
-    - main
+    - tags
