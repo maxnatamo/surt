@@ -1,8 +1,13 @@
 const path = require('path');
+const withPWA = require('next-pwa')({ dest: 'public' });
 const { withSentryConfig } = require('@sentry/nextjs');
 
+/**
+ * Next.js configuration
+ */
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+let config = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
@@ -17,6 +22,16 @@ const nextConfig = {
   }
 };
 
+/**
+ * PWA configuration with next-pwa
+ */
+
+config = withPWA(config);
+
+/**
+ * Sentry.io integration
+ */
+
 const useSentry = process.env.SENTRY_AUTH_TOKEN !== undefined;
 
 const sentryWebpackOptions = {
@@ -30,7 +45,7 @@ const sentryOptions = {
 if(useSentry) {
   console.log("[SURT] Sentry monitoring enabled.");
 
-  module.exports = withSentryConfig(nextConfig, sentryWebpackOptions, sentryOptions);
-} else {
-  module.exports = nextConfig;
+  config = withSentryConfig(config, sentryWebpackOptions, sentryOptions);
 }
+
+module.exports = config;
